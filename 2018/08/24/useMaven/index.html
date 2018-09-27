@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Maven的使用 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="项目结构  项目  src   main  java  package      test  java  package      resource    pom.xml    maven常用的构造命令 compile 编译 test 测试 package 打包 clean 删除target install 安装jar包到本地仓库中  maven引入构建包的流程 使用compile编译源代码 编译">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maven的使用">
+<meta property="og:url" content="http://yoursite.com/2018/08/24/useMaven/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="项目结构  项目  src   main  java  package      test  java  package      resource    pom.xml    maven常用的构造命令 compile 编译 test 测试 package 打包 clean 删除target install 安装jar包到本地仓库中  maven引入构建包的流程 使用compile编译源代码 编译">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-24T14:45:06.844Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maven的使用">
+<meta name="twitter:description" content="项目结构  项目  src   main  java  package      test  java  package      resource    pom.xml    maven常用的构造命令 compile 编译 test 测试 package 打包 clean 删除target install 安装jar包到本地仓库中  maven引入构建包的流程 使用compile编译源代码 编译">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-useMaven" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/24/useMaven/" class="article-date">
+  <time datetime="2018-08-23T16:01:11.000Z" itemprop="datePublished">2018-08-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Maven的使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h2><ul>
+<li style="list-style: none"><input type="checkbox"> <strong>项目</strong><ul>
+<li style="list-style: none"><input type="checkbox"> src <ul>
+<li style="list-style: none"><input type="checkbox"> main<ul>
+<li style="list-style: none"><input type="checkbox"> java<ul>
+<li style="list-style: none"><input type="checkbox"> package</li>
+</ul>
+</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox"> test<ul>
+<li style="list-style: none"><input type="checkbox"> java<ul>
+<li style="list-style: none"><input type="checkbox"> package</li>
+</ul>
+</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox"> resource</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox"> pom.xml</li>
+</ul>
+</li>
+</ul>
+<h2 id="maven常用的构造命令"><a href="#maven常用的构造命令" class="headerlink" title="maven常用的构造命令"></a>maven常用的构造命令</h2><ul>
+<li>compile 编译</li>
+<li>test 测试</li>
+<li>package 打包</li>
+<li>clean 删除target</li>
+<li>install 安装jar包到本地仓库中</li>
+</ul>
+<h2 id="maven引入构建包的流程"><a href="#maven引入构建包的流程" class="headerlink" title="maven引入构建包的流程"></a>maven引入构建包的流程</h2><ol>
+<li>使用compile编译源代码</li>
+<li>编译的过程中如果程序用到了其他的依赖包会去pom.xml查找</li>
+<li>试图引入该依赖包的坐标</li>
+<li>引入坐标以后，会去本地仓库中查找</li>
+<li>如果有本地仓库中有这些jar包，会将这些jar包放到classpath中</li>
+<li>如果没有则会去网上下载，并将起放到本地仓库中</li>
+</ol>
+<h2 id="自动创建目录骨架"><a href="#自动创建目录骨架" class="headerlink" title="自动创建目录骨架"></a>自动创建目录骨架</h2><p>使用archetype插件<br>用于创建符合maven规定的目录骨架<br>创建目录的两种方式：</p>
+<pre><code>1. mvn archetype:generate 按照提示进行选择
+2. mvn archetype:generate -DgroupId=组织名，公司网址的反写+项目名 -DartifactId=项目名-模块名 -Dversion=版本号 -Dpackage=代码所存在的包名
+</code></pre><h2 id="maven中的坐标和仓库"><a href="#maven中的坐标和仓库" class="headerlink" title="maven中的坐标和仓库"></a>maven中的坐标和仓库</h2><ul>
+<li style="list-style: none"><input type="checkbox"> 坐标<ul>
+<li style="list-style: none"><input type="checkbox"> 构件</li>
+</ul>
+</li>
+</ul>
+<p>构件通过坐标作为其唯一标识</p>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 仓库<ul>
+<li style="list-style: none"><input type="checkbox"> 本地仓库</li>
+<li style="list-style: none"><input type="checkbox"> 远程仓库</li>
+</ul>
+</li>
+<li style="list-style: none"><input type="checkbox"> 镜像仓库</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">设置镜像仓库的位置</span><br><span class="line">打开 &gt;maven &gt;conf &gt;settings.xml</span><br><span class="line">找到 mirrors 标签</span><br><span class="line">添加 mirror</span><br><span class="line">    将id设置为 maven.net.cn</span><br><span class="line">    将mirrorOf 设置为central或*</span><br><span class="line">    url设置为 http://maven.net.cn/content/groups/public</span><br></pre></td></tr></table></figure>
+<ul>
+<li style="list-style: none"><input type="checkbox"> 更改本地仓库位置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在settings.xml中找到settings标签</span><br><span class="line">添加localRepository标签 并添加路径</span><br></pre></td></tr></table></figure>
+<h2 id="pom-xml常用标签"><a href="#pom-xml常用标签" class="headerlink" title="pom.xml常用标签"></a>pom.xml常用标签</h2><ul>
+<li>modelVersion 指定了当前pom版本 4.0.0</li>
+<li>version 版本号<br>  第一个0表示大版本号<br>  第二个0表示分支版本号<br>  第三个0表示小版本号<br>  snapshot 快照<br>  alpha 内部测试<br>  beta 公测<br>  release 稳定<br>  GA 正式发布</li>
+<li>packaging 打包方式<br>  默认jar<br>  war zip pom</li>
+<li>name 项目描述名</li>
+<li>url 项目地址</li>
+<li>description 项目描述</li>
+<li>developers 开发人员列表</li>
+<li>licenses </li>
+<li>dependencies 依赖列表<ul>
+<li>dependency 依赖项<ul>
+<li>groupId</li>
+<li>artifactId<br>-version</li>
+<li>type</li>
+<li>scope 使用范围 如：test 默认为Compile</li>
+<li>optional 设置依赖是否可选默认为false</li>
+<li>exclusions 排除依赖传递列表<ul>
+<li>exclusion<ul>
+<li>groupId</li>
+<li>artifactId</li>
+<li>version</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>dependencyManagement 依赖管理<ul>
+<li>dependencies<ul>
+<li>dependency</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>build 构建<ul>
+<li>plugins 插件列表<ul>
+<li>plugin 插件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>parent</li>
+<li>modules<ul>
+<li>module</li>
+</ul>
+</li>
+</ul>
+<h2 id="依赖冲突"><a href="#依赖冲突" class="headerlink" title="依赖冲突"></a>依赖冲突</h2><p>场景：A和B都依赖C，但是依赖的版本不同，D依赖A和B，那么D会依赖那个版本的C？</p>
+<ol>
+<li>短路优先<ul>
+<li>A &gt; B &gt; C &gt; X(jar)1.0</li>
+<li>A &gt; D &gt; X(jar) 1.1</li>
+<li>A – X(jar)1.1</li>
+</ul>
+</li>
+<li>先声明先优先<ul>
+<li>如果长度相同，则谁先声明，先解析谁</li>
+</ul>
+</li>
+</ol>
+<h2 id="聚合和继承"><a href="#聚合和继承" class="headerlink" title="聚合和继承"></a>聚合和继承</h2><p>将pom文件中的packaging修改为pom    </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/24/useMaven/" data-id="cjlz79jkx0005nn9alyndrker" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/24/userSpringboot/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          userSpringboot
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/20/useMarkdown/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">useMarkdown</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">August 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/09/11/studyspring/">studyspring</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/08/studySpringBoot/">studySpringBoot</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/04/mavenError/">mavenError</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/24/userSpringboot/">userSpringboot</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/24/useMaven/">Maven的使用</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
